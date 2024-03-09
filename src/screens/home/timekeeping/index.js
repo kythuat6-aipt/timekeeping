@@ -50,7 +50,7 @@ const TimeKeeping = () => {
       const base64 = await FileSystem.readAsStringAsync(image, {
         encoding: FileSystem.EncodingType.Base64,
       });
-  
+      
       const values = {
         time_keeping: now,
         description: value,

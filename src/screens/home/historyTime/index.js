@@ -10,7 +10,6 @@ const HistoryTime = ({ navigation }) => {
     try {
       await AsyncStorage.removeItem(AIPT_TOKEN);
       navigation.navigate('login');
-      
     } catch (error) {
       console.error('Lỗi khi đăng xuất:', error);
       Alert.alert('Lỗi', 'Đã xảy ra lỗi khi đăng xuất.');

@@ -9,17 +9,9 @@ export const actionLogin = (data) => {
   })
 }
 
-// export const actionGetUserProfileByToken = async (dispatch) => {
-//   try {
-//     const {status, data} = await api({
-//       method: "GET", 
-//       url: "/get-user-profile-by-token"
-//     })
-
-//     if (status === 200) {
-//       dispatch({type: actions.SET_PROFILE, payload: data})
-//     }
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+export const actionGetUserProfileByToken = () => {
+  return api({
+    method: "GET",
+    url: "/get-user-profile-by-token"
+  })
+}

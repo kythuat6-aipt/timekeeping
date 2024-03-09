@@ -6,19 +6,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button } from '@ant-design/react-native';
 import { actionLogin } from './actions';
 import { AIPT_TOKEN } from "utils/constants/config"
+import { useDispatch } from "react-redux"
+import * as actions from 'utils/constants/redux-actions'
 
 import {
   View, TextInput, Text, TouchableOpacity,
-  Image, ActivityIndicator, alert
+  Image, ActivityIndicator, Alert
 } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  
   // form values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const toggleSecureEntry = () => {
     setSecureTextEntry(!secureTextEntry);
@@ -28,15 +31,15 @@ const LoginScreen = ({ navigation }) => {
     setLoading(true);
 
     try {  
-      
       const {data, status} = await actionLogin({username, password});
       
       if (status === 200) {
+        dispatch({type: actions.SET_PROFILE, payload: data?.profile})
         AsyncStorage.setItem(AIPT_TOKEN, data?.token);
         navigation.navigate('home');
       }
       else {
-        console.log(data?.message);
+        Alert.alert('', data?.message)
       }
     } catch (error) {
       console.log(error);
